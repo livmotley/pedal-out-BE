@@ -1,4 +1,4 @@
-const { fetchRides, fetchRideById } = require('../models/rides.models.js');
+const { fetchRides, fetchRideById } = require('../../models/postgres/rides.models.js');
 
 exports.getRides = async (req, res, next) => {
 	try {
