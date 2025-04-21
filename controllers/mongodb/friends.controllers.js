@@ -1,5 +1,5 @@
 const { connectToDB } = require("../../db/mongodb.js");
-const { postFriendship, getAllFollowers, getAllFollowing, removeIndividualFriendship, removeAllFriendships } = require("../../models/mongodb/friends.models.js");
+const { postFriendship, getAllFollowers, removeIndividualFriendship, removeAllFriendships } = require("../../models/mongodb/friends.models.js");
 
 exports.createFriendship = (req, res, next) => {
     const env = process.env.NODE_ENV || 'development';
