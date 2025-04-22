@@ -41,6 +41,10 @@ exports.fetchAllChatsByUserId = (dbName, db, username) => {
             const uniqueIds = [...new Set(chats.map((chat) => {
                 return chat.chatId
             }))]
-            return uniqueIds;
+            const otherChatPartners = chats.flatMap(chat => chat.participants)
+            .filter(participant => participant !== username);
+
+            const uniqueChatPartners = [...new Set(otherChatPartners)];
+            return {uniqueIds, uniqueChatPartners};
         })
 }

@@ -4,16 +4,13 @@ const { postNewMessage, getAllMessages, findAllChatsByUserId } = require("../con
 const chatsRouter = express.Router();
 
 chatsRouter
-.route('/:username')
-.get(findAllChatsByUserId);
-
-chatsRouter
 .route('/:chatId')
 .get(getAllMessages)
 .post(postNewMessage);
 
 chatsRouter
 .route('/')
+.get(findAllChatsByUserId)
 .post(postNewMessage);
 
 module.exports = chatsRouter;
