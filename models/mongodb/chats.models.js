@@ -38,13 +38,16 @@ exports.fetchAllChatsByUserId = (dbName, db, username) => {
     return collection.find({ participants: username})
     .sort({ 'sentAt': -1 }).toArray()
     .then((chats) => {
-            const uniqueIds = [...new Set(chats.map((chat) => {
-                return chat.chatId
-            }))]
-            const otherChatPartners = chats.flatMap(chat => chat.participants)
-            .filter(participant => participant !== username);
+            const chatMap = new Map();
+            chats.forEach(chat => {
+                const otherParticipant = chat.participants.find(p => p !== username);
+                if(!chatMap.has(chat.chatId)) {
+                    chatMap.set(chat.chatId, otherParticipant);
+                }
+            });
 
-            const uniqueChatPartners = [...new Set(otherChatPartners)];
-            return {uniqueIds, uniqueChatPartners};
+            const chatInfo = Array.from(chatMap.entries());
+
+            return chatInfo;
         })
 }

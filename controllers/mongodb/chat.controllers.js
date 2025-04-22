@@ -49,8 +49,8 @@ exports.findAllChatsByUserId = (req, res, next) => {
         const db = client.db(dbName);
         return fetchAllChatsByUserId(dbName, db, username);
     })
-    .then((result) => {
-        res.status(200).send({chatIds: result.uniqueIds, chatPartners: result.uniqueChatPartners});
+    .then((chatInfo) => {
+        res.status(200).send({chatInfo});
     })
     .catch((err) => {
         next(err);
